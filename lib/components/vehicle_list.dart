@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../helpers/date_helpers.dart';
 import 'pages/add_vehicle_page.dart';
 
 class VehicleList extends StatelessWidget {
@@ -71,7 +72,7 @@ class VehicleList extends StatelessWidget {
                                       Text("Registered by $userDisplayName"),
                                       const SizedBox(height: 4.0),
                                       Text(
-                                          "Check in on ${checkInDate.toDate().toIso8601String()} - Check out on ${checkOutDate.toDate().toIso8601String()}"),
+                                          "Check in: ${DateHelpers.formatForUser(startDate: checkInDate.toDate())}, Check out:  ${DateHelpers.formatForUser(startDate: checkOutDate.toDate())}"),
                                     ]),
                                 trailing: userId ==
                                         FirebaseAuth.instance.currentUser?.uid
