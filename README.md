@@ -1,6 +1,6 @@
 # flutter_firebase_app
 
-A new Flutter project.
+An application built in flutter meant to serve as an app where visitors can register for visitor parking at a colleagues/friends apartment.
 
 ## Getting Started
 
