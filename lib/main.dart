@@ -19,19 +19,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const AuthGate(),
-        builder: (context, widget) {
-          Widget error = const Text('...rendering error...');
-          if (widget is Scaffold || widget is Navigator) {
-            error = Scaffold(body: Center(child: error));
-          }
-          ErrorWidget.builder = (errorDetails) => error;
-          if (widget != null) return widget;
-          throw ('widget is null');
-        });
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const AuthGate(),
+      // builder: (context, widget) {
+      //   Widget error = const Text('...rendering error...');
+      //   if (widget is Scaffold || widget is Navigator) {
+      //     error = Scaffold(body: Center(child: error));
+      //   }
+      //   ErrorWidget.builder = (errorDetails) => error;
+      //   if (widget != null) return widget;
+      //   throw ('widget is null');
+      // }
+    );
   }
 }
