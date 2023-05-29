@@ -20,6 +20,13 @@ class AuthGate extends StatelessWidget {
               GoogleProviderConfiguration(
                   clientId: dotenv.env["googleProviderClientId"]!)
             ],
+            sideBuilder: (context, constraints) {
+              return Padding(
+                padding: EdgeInsets.all(20.0),
+                child: AspectRatio(
+                    aspectRatio: 1, child: Image.asset('Dashatars.png')),
+              );
+            },
             subtitleBuilder: (context, action) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
