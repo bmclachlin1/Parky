@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/vehicle.dart';
+
 class UpdateVehicleForm extends StatefulWidget {
-  const UpdateVehicleForm({super.key});
+  final Vehicle vehicle;
+
+  const UpdateVehicleForm({super.key, required this.vehicle});
 
   @override
   State<UpdateVehicleForm> createState() => _UpdateVehicleFormState();

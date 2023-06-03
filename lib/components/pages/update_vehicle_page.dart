@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../models/vehicle.dart';
 import '../update_vehicle_form.dart';
 
 class UpdateVehiclePage extends StatelessWidget {
-  const UpdateVehiclePage({super.key});
+  final Vehicle vehicle;
 
-  @override
+  const UpdateVehiclePage({super.key, required this.vehicle});
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
@@ -26,7 +28,7 @@ class UpdateVehiclePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const UpdateVehicleForm(),
+              UpdateVehicleForm(vehicle: vehicle),
             ],
           ),
         ),

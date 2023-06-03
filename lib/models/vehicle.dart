@@ -18,7 +18,14 @@ class Vehicle {
       required this.checkInDate,
       required this.checkOutDate});
 
-  // factory Vehicle.fromJson(Map<String, Object> json) {
-  //   return Vehicle(make: json['make']);
-  // }
+  factory Vehicle.fromJson(Map<String, dynamic> json) {
+    return Vehicle(
+        make: json['make'],
+        model: json['model'],
+        year: json['year'],
+        userId: json['userId'],
+        userDisplayName: json['userDisplayName'],
+        checkInDate: json['checkInDate'],
+        checkOutDate: json['checkOutDate']);
+  }
 }

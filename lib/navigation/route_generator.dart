@@ -5,10 +5,11 @@ import 'package:flutter_firebase_app/components/pages/auth_gate_page.dart';
 import 'package:flutter_firebase_app/components/pages/landing_page.dart';
 import 'package:flutter_firebase_app/components/pages/update_vehicle_page.dart';
 
+import '../models/vehicle.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // Getting arguments passed in while calling Navigator.pushNamed
-    // final args = settings.arguments;
+    final args = settings.arguments;
 
     switch (settings.name) {
       case '/':
@@ -28,8 +29,12 @@ class RouteGenerator {
       case '/add_vehicle':
         return MaterialPageRoute(builder: (context) => const AddVehiclePage());
       case '/update_vehicle':
-        return MaterialPageRoute(
-            builder: (context) => const UpdateVehiclePage());
+        if (args is Vehicle) {
+          return MaterialPageRoute(
+              builder: (context) => UpdateVehiclePage(vehicle: args));
+        }
+        return _errorRoute();
+
       // Validation of correct data type
       // if (args is String) {
       //   return MaterialPageRoute(

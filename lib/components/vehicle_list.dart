@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/date_helpers.dart';
+import '../models/vehicle.dart';
 
 class VehicleList extends StatelessWidget {
   const VehicleList({
@@ -46,36 +47,33 @@ class VehicleList extends StatelessWidget {
                           Map<String, dynamic> data = snapshot.data!.docs[index]
                               .data()! as Map<String, dynamic>;
 
-                          String make = data["make"];
-                          String model = data["model"];
-                          int year = data["year"];
-                          String userId = data["userId"];
-                          String userDisplayName = data["userDisplayName"];
-                          Timestamp checkInDate = data["checkInDate"];
-                          Timestamp checkOutDate = data["checkOutDate"];
+                          Vehicle vehicle = Vehicle.fromJson(data);
 
                           return Container(
                               decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide())),
                               child: ListTile(
-                                title: Text("$year $make $model"),
+                                title: Text(
+                                    "${vehicle.year} ${vehicle.make} ${vehicle.model}"),
                                 subtitle: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       const SizedBox(height: 4.0),
-                                      Text("Registered by $userDisplayName"),
+                                      Text(
+                                          "Registered by ${vehicle.userDisplayName}"),
                                       const SizedBox(height: 4.0),
                                       Text(
-                                          "Check in: ${DateHelpers.formatForUser(startDate: checkInDate.toDate())}, Check out:  ${DateHelpers.formatForUser(startDate: checkOutDate.toDate())}"),
+                                          "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out:  ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
                                     ]),
-                                trailing: userId ==
+                                trailing: vehicle.userId ==
                                         FirebaseAuth.instance.currentUser?.uid
                                     ? ElevatedButton.icon(
                                         icon: const Icon(Icons.edit),
                                         onPressed: () {
                                           Navigator.pushNamed(
-                                              context, '/update_vehicle');
+                                              context, '/update_vehicle',
+                                              arguments: vehicle);
                                         },
                                         label: const Text("Edit"))
                                     : null,
