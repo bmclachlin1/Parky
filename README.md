@@ -1,4 +1,4 @@
-# flutter_firebase_app
+# Visitor parking app
 
 An application built in flutter meant to serve as an app where visitors can register for visitor parking at a colleagues/friends apartment.
 
