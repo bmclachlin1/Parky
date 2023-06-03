@@ -28,4 +28,19 @@ class Vehicle {
         checkInDate: json['checkInDate'],
         checkOutDate: json['checkOutDate']);
   }
+
+  Map<String, dynamic> toJson() => {
+        'make': make,
+        'model': model,
+        'year': year,
+        'userId': userId,
+        'userDisplayName': userDisplayName,
+        'checkInDate': checkInDate,
+        'checkOutDate': checkOutDate
+      };
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }
