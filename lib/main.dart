@@ -10,7 +10,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  // FirebaseUIAuth.configureProviders([
+  //   EmailAuthProvider(),
+  //   GoogleProvider(clientId: dotenv.env["googleProviderClientId"]!)
+  // ]);
   runApp(const MyApp());
 }
 

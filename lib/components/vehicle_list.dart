@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../helpers/date_helpers.dart';
 import 'pages/add_vehicle_page.dart';
+import 'pages/update_vehicle_page.dart';
 
 class VehicleList extends StatelessWidget {
   const VehicleList({
@@ -50,7 +51,6 @@ class VehicleList extends StatelessWidget {
                           Map<String, dynamic> data = snapshot.data!.docs[index]
                               .data()! as Map<String, dynamic>;
 
-                          print(data);
                           String make = data["make"];
                           String model = data["model"];
                           int year = data["year"];
@@ -79,7 +79,10 @@ class VehicleList extends StatelessWidget {
                                     ? ElevatedButton.icon(
                                         icon: const Icon(Icons.edit),
                                         onPressed: () {
-                                          // navigate to edit vehicle page
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const UpdateVehiclePage()));
                                         },
                                         label: const Text("Edit"))
                                     : null,

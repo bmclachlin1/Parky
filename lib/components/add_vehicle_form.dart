@@ -12,7 +12,7 @@ class AddVehicleForm extends StatefulWidget {
 class _AddVehicleFormState extends State<AddVehicleForm> {
   final _formKey = GlobalKey<FormState>();
 
-  DateTime _curr = DateTime.now();
+  final DateTime _curr = DateTime.now();
 
   bool _stringFieldValidatorCondition(value) {
     return value == null || value.length < 2;
@@ -44,7 +44,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Column(
           children: [
             TextFormField(
@@ -58,6 +58,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 if (_stringFieldValidatorCondition(value)) {
                   return "Please enter your full name";
                 }
+                return null;
               },
             ),
             TextFormField(

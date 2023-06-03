@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
 
 import '../vehicle_list.dart';
 import 'add_vehicle_page.dart';
@@ -13,12 +13,12 @@ class LandingPage extends StatefulWidget {
   State<LandingPage> createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
-  final Stream<QuerySnapshot> _vehiclesStream = FirebaseFirestore.instance
-      .collection('vehicles')
-      .orderBy('checkInDate', descending: true)
-      .snapshots();
+final Stream<QuerySnapshot> _vehiclesStream = FirebaseFirestore.instance
+    .collection('vehicles')
+    .orderBy('checkInDate', descending: true)
+    .snapshots();
 
+class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
