@@ -72,6 +72,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 if (_stringFieldValidatorCondition(value)) {
                   return "Please enter the Make of your vehicle";
                 }
+                return null;
               },
             ),
             TextFormField(
@@ -85,6 +86,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 if (_stringFieldValidatorCondition(value)) {
                   return "Please enter the Make of your vehicle";
                 }
+                return null;
               },
             ),
             DropdownButtonFormField<int>(
@@ -105,6 +107,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 if (value == null) {
                   return "Please select the year of your vehicle";
                 }
+                return null;
               },
             ),
             FormField<DateTime>(

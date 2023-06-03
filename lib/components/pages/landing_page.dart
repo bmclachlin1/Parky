@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../vehicle_list.dart';
-import 'add_vehicle_page.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -23,26 +20,14 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Vehicle.io"),
+        title: const Text("Visitor Parking"),
         centerTitle: true,
         leading: const Icon(Icons.car_crash),
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<ProfileScreen>(
-                  builder: (context) => ProfileScreen(
-                    appBar: AppBar(title: const Text("User Profile")),
-                    actions: [
-                      SignedOutAction((context) {
-                        Navigator.of(context).pop();
-                      })
-                    ],
-                  ),
-                ),
-              );
+              Navigator.pushNamed(context, '/profile');
             },
           )
         ],

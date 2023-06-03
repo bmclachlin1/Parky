@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/date_helpers.dart';
-import 'pages/add_vehicle_page.dart';
-import 'pages/update_vehicle_page.dart';
 
 class VehicleList extends StatelessWidget {
   const VehicleList({
@@ -37,10 +35,7 @@ class VehicleList extends StatelessWidget {
                 children: <Widget>[
                   ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<AddVehiclePage>(
-                                builder: (context) => const AddVehiclePage()));
+                        Navigator.pushNamed(context, '/add_vehicle');
                       },
                       icon: const Icon(Icons.add),
                       label: const Text('Register Vehicle')),
@@ -79,10 +74,8 @@ class VehicleList extends StatelessWidget {
                                     ? ElevatedButton.icon(
                                         icon: const Icon(Icons.edit),
                                         onPressed: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const UpdateVehiclePage()));
+                                          Navigator.pushNamed(
+                                              context, '/update_vehicle');
                                         },
                                         label: const Text("Edit"))
                                     : null,

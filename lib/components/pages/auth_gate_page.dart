@@ -32,9 +32,9 @@ class AuthGate extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: action == AuthAction.signIn
                     ? const Text(
-                        'Welcome to Vehicle.io, please sign in to register your vehicle!')
+                        'Welcome to Visitor Parking, please sign in to register your vehicle!')
                     : const Text(
-                        'Welcome to Vehicle.io, please sign up to register your vehicle!'),
+                        'Welcome to Visitor Parking, please sign up to register your vehicle!'),
               );
             },
           );
