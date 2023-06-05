@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,

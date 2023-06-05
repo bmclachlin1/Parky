@@ -12,11 +12,24 @@ class UpdateVehicleForm extends StatefulWidget {
 }
 
 class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
-      child: Placeholder(),
+      child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                initialValue: widget.vehicle.userDisplayName,
+                decoration: const InputDecoration(
+                    labelText: "Your full name",
+                    hintText: "Enter your first and last name"),
+              )
+            ],
+          )),
     );
   }
 }
