@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_app/components/app_bar.dart';
 
 import '../../models/vehicle.dart';
 import '../update_vehicle_form.dart';
@@ -10,8 +11,9 @@ class UpdateVehiclePage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const MyAppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             children: [

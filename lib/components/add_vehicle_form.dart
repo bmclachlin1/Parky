@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../helpers/form_helpers.dart';
+
 class AddVehicleForm extends StatefulWidget {
   const AddVehicleForm({super.key});
 
@@ -14,30 +16,12 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
 
   final DateTime _curr = DateTime.now();
 
-  bool _stringFieldValidatorCondition(value) {
-    return value == null || value.length < 2;
-  }
-
-  String? _validateDate(DateTime? dt) {
-    if (dt == null) {
-      return "Please choose a date";
-    }
-    return null;
-  }
-
   String? _make;
   String? _model;
   String? _name;
   int? _year;
   DateTime? _checkInDate;
   DateTime? _checkOutDate;
-
-  List<int> _generateYearsForDropdown() {
-    int currentYear = _curr.year;
-    return List<int>.generate(currentYear - 1970 + 1, (index) => 1970 + index)
-        .reversed
-        .toList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +39,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 setState(() => _name = value);
               },
               validator: (value) {
-                if (_stringFieldValidatorCondition(value)) {
+                if (FormHelpers.stringFieldValidatorCondition(value)) {
                   return "Please enter your full name";
                 }
                 return null;
@@ -69,7 +53,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 setState(() => _make = value);
               },
               validator: (value) {
-                if (_stringFieldValidatorCondition(value)) {
+                if (FormHelpers.stringFieldValidatorCondition(value)) {
                   return "Please enter the Make of your vehicle";
                 }
                 return null;
@@ -83,14 +67,14 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 setState(() => _model = value);
               },
               validator: (value) {
-                if (_stringFieldValidatorCondition(value)) {
+                if (FormHelpers.stringFieldValidatorCondition(value)) {
                   return "Please enter the Make of your vehicle";
                 }
                 return null;
               },
             ),
             DropdownButtonFormField<int>(
-              items: _generateYearsForDropdown()
+              items: FormHelpers.generateYearsForDropdown()
                   .map((int year) => DropdownMenuItem(
                       value: year, child: Text(year.toString())))
                   .toList(),
@@ -111,7 +95,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
               },
             ),
             FormField<DateTime>(
-                validator: _validateDate,
+                validator: FormHelpers.validateDate,
                 builder: (FormFieldState<DateTime> field) {
                   return InkWell(
                       onTap: () async {
@@ -140,7 +124,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                               : null));
                 }),
             FormField<DateTime>(
-                validator: _validateDate,
+                validator: FormHelpers.validateDate,
                 builder: (FormFieldState<DateTime> field) {
                   return InkWell(
                       onTap: () async {

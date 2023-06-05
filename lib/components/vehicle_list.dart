@@ -5,13 +5,18 @@ import 'package:flutter/material.dart';
 import '../helpers/date_helpers.dart';
 import '../models/vehicle.dart';
 
-class VehicleList extends StatelessWidget {
-  const VehicleList({
-    super.key,
-    required Stream<QuerySnapshot<Object?>> vehiclesStream,
-  }) : _vehiclesStream = vehiclesStream;
+class VehicleList extends StatefulWidget {
+  const VehicleList({super.key});
 
-  final Stream<QuerySnapshot<Object?>> _vehiclesStream;
+  @override
+  State<VehicleList> createState() => _VehicleListState();
+}
+
+class _VehicleListState extends State<VehicleList> {
+  final Stream<QuerySnapshot> _vehiclesStream = FirebaseFirestore.instance
+      .collection('vehicles')
+      .orderBy('checkInDate', descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +51,11 @@ class VehicleList extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           Map<String, dynamic> data = snapshot.data!.docs[index]
                               .data()! as Map<String, dynamic>;
-
                           Vehicle vehicle = Vehicle.fromJson(data);
 
                           return Container(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide())),
                               child: ListTile(
