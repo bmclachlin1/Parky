@@ -58,20 +58,11 @@ class _VehicleListState extends State<VehicleList> {
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide())),
-                              child: ListTile(
+                              child: ExpansionTile(
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
                                 title: Text(
                                     "${vehicle.year} ${vehicle.make} ${vehicle.model}"),
-                                subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(height: 4.0),
-                                      Text(
-                                          "Registered by ${vehicle.userDisplayName}"),
-                                      const SizedBox(height: 4.0),
-                                      Text(
-                                          "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
-                                    ]),
                                 trailing: vehicle.userId ==
                                         FirebaseAuth.instance.currentUser?.uid
                                     ? ElevatedButton.icon(
@@ -83,6 +74,19 @@ class _VehicleListState extends State<VehicleList> {
                                         },
                                         label: const Text("Edit"))
                                     : null,
+                                children: <Widget>[
+                                  Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 4.0),
+                                        Text(
+                                            "Registered by ${vehicle.userDisplayName}"),
+                                        const SizedBox(height: 4.0),
+                                        Text(
+                                            "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
+                                      ])
+                                ],
                               ));
                         }),
                   )
