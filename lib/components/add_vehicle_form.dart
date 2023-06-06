@@ -18,10 +18,35 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
 
   String? _make;
   String? _model;
-  String? _name;
+  String? _userDisplayName;
   int? _year;
   DateTime? _checkInDate;
   DateTime? _checkOutDate;
+
+  void _addVehicle() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      FirebaseFirestore.instance.collection("vehicles").add({
+        "make": _make,
+        "model": _model,
+        "year": _year,
+        "checkInDate": _checkInDate,
+        "checkOutDate": _checkOutDate,
+        "userId": FirebaseAuth.instance.currentUser?.uid,
+        "userDisplayName": _userDisplayName
+      });
+      const successMsg = SnackBar(
+          backgroundColor: Colors.green,
+          content: Text("Successfully added vehicle!"));
+      ScaffoldMessenger.of(context).showSnackBar(successMsg);
+      Navigator.of(context).pop();
+    } else {
+      const errorMsg = SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Your form completed with errors."));
+      ScaffoldMessenger.of(context).showSnackBar(errorMsg);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,50 +56,47 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Column(
           children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                  labelText: "Your full name",
-                  hintText: "Enter your first and last name"),
-              onSaved: (String? value) {
-                setState(() => _name = value);
+            FormFieldBuilders.buildTextFormField(
+              labelText: 'Your full name',
+              hintText: 'Enter your first and last name',
+              onSaved: (value) {
+                setState(() => _userDisplayName = value);
               },
               validator: (value) {
-                if (FormHelpers.stringFieldValidatorCondition(value)) {
-                  return "Please enter your full name";
+                if (FormValidators.stringFieldValidatorCondition(value)) {
+                  return 'Please enter your full name';
                 }
                 return null;
               },
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                  labelText: "Make",
-                  hintText: "Enter the Make of your vehicle"),
-              onSaved: (String? value) {
+            FormFieldBuilders.buildTextFormField(
+              labelText: 'Make',
+              hintText: 'Enter the make of your vehicle',
+              onSaved: (value) {
                 setState(() => _make = value);
               },
               validator: (value) {
-                if (FormHelpers.stringFieldValidatorCondition(value)) {
-                  return "Please enter the Make of your vehicle";
+                if (FormValidators.stringFieldValidatorCondition(value)) {
+                  return 'Please enter the make of your vehicle';
                 }
                 return null;
               },
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                  labelText: "Model",
-                  hintText: "Enter the Model of your vehicle"),
-              onSaved: (String? value) {
+            FormFieldBuilders.buildTextFormField(
+              labelText: 'Model',
+              hintText: 'Enter the model of your vehicle',
+              onSaved: (value) {
                 setState(() => _model = value);
               },
               validator: (value) {
-                if (FormHelpers.stringFieldValidatorCondition(value)) {
-                  return "Please enter the Make of your vehicle";
+                if (FormValidators.stringFieldValidatorCondition(value)) {
+                  return 'Please enter the model of your vehicle';
                 }
                 return null;
               },
             ),
             DropdownButtonFormField<int>(
-              items: FormHelpers.generateYearsForDropdown()
+              items: FormValidators.generateYearsForDropdown()
                   .map((int year) => DropdownMenuItem(
                       value: year, child: Text(year.toString())))
                   .toList(),
@@ -95,7 +117,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
               },
             ),
             FormField<DateTime>(
-                validator: FormHelpers.validateDate,
+                validator: FormValidators.validateDate,
                 builder: (FormFieldState<DateTime> field) {
                   return InkWell(
                       onTap: () async {
@@ -124,7 +146,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                               : null));
                 }),
             FormField<DateTime>(
-                validator: FormHelpers.validateDate,
+                validator: FormValidators.validateDate,
                 builder: (FormFieldState<DateTime> field) {
                   return InkWell(
                       onTap: () async {
@@ -152,32 +174,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                               ? Text('${_checkOutDate!.toLocal()}')
                               : null));
                 }),
-            ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    FirebaseFirestore.instance.collection("vehicles").add({
-                      "make": _make,
-                      "model": _model,
-                      "year": _year,
-                      "checkInDate": _checkInDate,
-                      "checkOutDate": _checkOutDate,
-                      "userId": FirebaseAuth.instance.currentUser?.uid,
-                      "userDisplayName": _name
-                    });
-                    const successMsg = SnackBar(
-                        backgroundColor: Colors.green,
-                        content: Text("Successfully added vehicle!"));
-                    ScaffoldMessenger.of(context).showSnackBar(successMsg);
-                    Navigator.of(context).pop();
-                  } else {
-                    const errorMsg = SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text("Your form completed with errors."));
-                    ScaffoldMessenger.of(context).showSnackBar(errorMsg);
-                  }
-                },
-                child: const Text("Add"))
+            ElevatedButton(onPressed: _addVehicle, child: const Text("Add"))
           ],
         ),
       ),

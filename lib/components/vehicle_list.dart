@@ -70,7 +70,7 @@ class _VehicleListState extends State<VehicleList> {
                                           "Registered by ${vehicle.userDisplayName}"),
                                       const SizedBox(height: 4.0),
                                       Text(
-                                          "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out:  ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
+                                          "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
                                     ]),
                                 trailing: vehicle.userId ==
                                         FirebaseAuth.instance.currentUser?.uid
