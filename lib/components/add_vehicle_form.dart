@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:signature/signature.dart';
 
 import '../helpers/form_helpers.dart';
 
@@ -16,6 +17,13 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
 
   final DateTime _curr = DateTime.now();
 
+  final _signatureController = SignatureController(
+    penStrokeWidth: 1,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.transparent,
+    exportPenColor: Colors.black,
+  );
+
   String? _make;
   String? _model;
   String? _userDisplayName;
@@ -23,9 +31,17 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
   DateTime? _checkInDate;
   DateTime? _checkOutDate;
 
-  void _addVehicle() {
+  void _addVehicle() async {
     if (_formKey.currentState!.validate()) {
+      if (_signatureController.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("You need to provide a signature.")));
+        return;
+      }
       _formKey.currentState!.save();
+
+      final signatureAsBytes = await _signatureController.toPngBytes();
       FirebaseFirestore.instance.collection("vehicles").add({
         "make": _make,
         "model": _model,
@@ -33,19 +49,29 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
         "checkInDate": _checkInDate,
         "checkOutDate": _checkOutDate,
         "userId": FirebaseAuth.instance.currentUser?.uid,
-        "userDisplayName": _userDisplayName
+        "userDisplayName": _userDisplayName,
+        "signatureBytes": signatureAsBytes
       });
-      const successMsg = SnackBar(
+
+      // see [https://stackoverflow.com/questions/68871880/do-not-use-buildcontexts-across-async-gaps]
+      // for why we check if context is mounted
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.green,
-          content: Text("Successfully added vehicle!"));
-      ScaffoldMessenger.of(context).showSnackBar(successMsg);
+          content: Text("Successfully added vehicle!")));
       Navigator.of(context).pop();
     } else {
-      const errorMsg = SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.red,
-          content: Text("Your form completed with errors."));
-      ScaffoldMessenger.of(context).showSnackBar(errorMsg);
+          content: Text("Your form completed with errors.")));
     }
+  }
+
+  @override
+  void dispose() {
+    _signatureController.dispose();
+    super.dispose();
   }
 
   @override
@@ -96,7 +122,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
               },
             ),
             DropdownButtonFormField<int>(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               items: FormValidators.generateYearsForDropdown()
                   .map((int year) => DropdownMenuItem(
                       value: year, child: Text(year.toString())))
@@ -180,6 +206,33 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                                 ? Text('${_checkOutDate!.toLocal()}')
                                 : null));
                   }),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Please sign below",
+                          style: Theme.of(context).textTheme.titleMedium),
+                      ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red),
+                          onPressed: () {
+                            _signatureController.clear();
+                          },
+                          icon: const Icon(Icons.clear),
+                          label: const Text("Clear"))
+                    ],
+                  ),
+                  Signature(
+                      key: const Key('signature'),
+                      controller: _signatureController,
+                      backgroundColor: Colors.grey,
+                      height: 100),
+                ],
+              ),
             ),
             ElevatedButton(
                 onPressed: _addVehicle, child: const Text("Register Vehicle"))
