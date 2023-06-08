@@ -58,31 +58,37 @@ class _VehicleListState extends State<VehicleList> {
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide())),
-                              child: ListTile(
+                              child: ExpansionTile(
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
                                 title: Text(
                                     "${vehicle.year} ${vehicle.make} ${vehicle.model}"),
-                                subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(height: 4.0),
-                                      Text(
-                                          "Registered by ${vehicle.userDisplayName}"),
-                                      const SizedBox(height: 4.0),
-                                      Text(
-                                          "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
-                                    ]),
                                 trailing: vehicle.userId ==
                                         FirebaseAuth.instance.currentUser?.uid
-                                    ? ElevatedButton.icon(
-                                        icon: const Icon(Icons.edit),
+                                    ? IconButton(
+                                        icon: const Icon(Icons.edit_document),
                                         onPressed: () {
                                           Navigator.pushNamed(
                                               context, '/update_vehicle',
                                               arguments: vehicle);
                                         },
-                                        label: const Text("Edit"))
+                                        hoverColor:
+                                            Colors.blue.withOpacity(0.3),
+                                      )
                                     : null,
+                                children: <Widget>[
+                                  Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 4.0),
+                                        Text(
+                                            "Registered by ${vehicle.userDisplayName}"),
+                                        const SizedBox(height: 4.0),
+                                        Text(
+                                            "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
+                                      ])
+                                ],
                               ));
                         }),
                   )
@@ -91,7 +97,7 @@ class _VehicleListState extends State<VehicleList> {
             );
           }
 
-          return const Text("No data :(");
+          return const Text("Oops! Something went wrong.");
         },
       )),
     );
