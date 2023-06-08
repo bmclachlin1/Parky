@@ -148,6 +148,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
               },
             ),
             DropdownButtonFormField<int>(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
               value: _year,
               items: FormValidators.generateYearsForDropdown()
                   .map(
@@ -173,66 +174,72 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
                 return null;
               },
             ),
-            FormField<DateTime>(
-                initialValue: _checkInDate,
-                validator: FormValidators.validateDate,
-                builder: (FormFieldState<DateTime> field) {
-                  return InkWell(
-                      onTap: () async {
-                        final selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: _checkInDate ?? _curr,
-                          firstDate: DateTime(_curr.year),
-                          lastDate: DateTime(_curr.year + 1),
-                        );
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: FormField<DateTime>(
+                  initialValue: _checkInDate,
+                  validator: FormValidators.validateDate,
+                  builder: (FormFieldState<DateTime> field) {
+                    return InkWell(
+                        onTap: () async {
+                          final selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: _checkInDate ?? _curr,
+                            firstDate: DateTime(_curr.year),
+                            lastDate: DateTime(_curr.year + 1),
+                          );
 
-                        if (selectedDate != null) {
-                          setState(() {
-                            _checkInDate = selectedDate;
-                          });
-                          field.didChange(selectedDate);
-                        }
-                      },
-                      child: InputDecorator(
-                          decoration: InputDecoration(
-                            labelText:
-                                'Select the check-in date of your vehicle',
-                            errorText: field.errorText,
-                          ),
-                          child: (_checkInDate != null)
-                              ? Text('${_checkInDate!.toLocal()}')
-                              : null));
-                }),
-            FormField<DateTime>(
-                initialValue: _checkOutDate,
-                validator: FormValidators.validateDate,
-                builder: (FormFieldState<DateTime> field) {
-                  return InkWell(
-                      onTap: () async {
-                        final selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: _checkOutDate ?? _curr,
-                          firstDate: DateTime(_curr.year),
-                          lastDate: DateTime(_curr.year + 1),
-                        );
+                          if (selectedDate != null) {
+                            setState(() {
+                              _checkInDate = selectedDate;
+                            });
+                            field.didChange(selectedDate);
+                          }
+                        },
+                        child: InputDecorator(
+                            decoration: InputDecoration(
+                              labelText:
+                                  'Select the check-in date of your vehicle',
+                              errorText: field.errorText,
+                            ),
+                            child: (_checkInDate != null)
+                                ? Text('${_checkInDate!.toLocal()}')
+                                : null));
+                  }),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: FormField<DateTime>(
+                  initialValue: _checkOutDate,
+                  validator: FormValidators.validateDate,
+                  builder: (FormFieldState<DateTime> field) {
+                    return InkWell(
+                        onTap: () async {
+                          final selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: _checkOutDate ?? _curr,
+                            firstDate: DateTime(_curr.year),
+                            lastDate: DateTime(_curr.year + 1),
+                          );
 
-                        if (selectedDate != null) {
-                          setState(() {
-                            _checkOutDate = selectedDate;
-                          });
-                          field.didChange(selectedDate);
-                        }
-                      },
-                      child: InputDecorator(
-                          decoration: InputDecoration(
-                            labelText:
-                                'Select the check-out date of your vehicle',
-                            errorText: field.errorText,
-                          ),
-                          child: (_checkOutDate != null)
-                              ? Text('${_checkOutDate!.toLocal()}')
-                              : null));
-                }),
+                          if (selectedDate != null) {
+                            setState(() {
+                              _checkOutDate = selectedDate;
+                            });
+                            field.didChange(selectedDate);
+                          }
+                        },
+                        child: InputDecorator(
+                            decoration: InputDecoration(
+                              labelText:
+                                  'Select the check-out date of your vehicle',
+                              errorText: field.errorText,
+                            ),
+                            child: (_checkOutDate != null)
+                                ? Text('${_checkOutDate!.toLocal()}')
+                                : null));
+                  }),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

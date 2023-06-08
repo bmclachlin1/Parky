@@ -53,7 +53,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             FormFieldBuilders.buildTextFormField(
@@ -96,6 +96,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
               },
             ),
             DropdownButtonFormField<int>(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
               items: FormValidators.generateYearsForDropdown()
                   .map((int year) => DropdownMenuItem(
                       value: year, child: Text(year.toString())))
@@ -116,65 +117,72 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 return null;
               },
             ),
-            FormField<DateTime>(
-                validator: FormValidators.validateDate,
-                builder: (FormFieldState<DateTime> field) {
-                  return InkWell(
-                      onTap: () async {
-                        final selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: _checkInDate ?? _curr,
-                          firstDate: DateTime(_curr.year),
-                          lastDate: DateTime(_curr.year + 1),
-                        );
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: FormField<DateTime>(
+                  validator: FormValidators.validateDate,
+                  builder: (FormFieldState<DateTime> field) {
+                    return InkWell(
+                        onTap: () async {
+                          final selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: _checkInDate ?? _curr,
+                            firstDate: DateTime(_curr.year),
+                            lastDate: DateTime(_curr.year + 1),
+                          );
 
-                        if (selectedDate != null) {
-                          setState(() {
-                            _checkInDate = selectedDate;
-                          });
-                          field.didChange(selectedDate);
-                        }
-                      },
-                      child: InputDecorator(
-                          decoration: InputDecoration(
-                            labelText:
-                                'Select the check-in date of your vehicle',
-                            errorText: field.errorText,
-                          ),
-                          child: (_checkInDate != null)
-                              ? Text('${_checkInDate!.toLocal()}')
-                              : null));
-                }),
-            FormField<DateTime>(
-                validator: FormValidators.validateDate,
-                builder: (FormFieldState<DateTime> field) {
-                  return InkWell(
-                      onTap: () async {
-                        final selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: _checkOutDate ?? _curr,
-                          firstDate: DateTime(_curr.year),
-                          lastDate: DateTime(_curr.year + 1),
-                        );
+                          if (selectedDate != null) {
+                            setState(() {
+                              _checkInDate = selectedDate;
+                            });
+                            field.didChange(selectedDate);
+                          }
+                        },
+                        child: InputDecorator(
+                            decoration: InputDecoration(
+                              labelText:
+                                  'Select the check-in date of your vehicle',
+                              errorText: field.errorText,
+                            ),
+                            child: (_checkInDate != null)
+                                ? Text('${_checkInDate!.toLocal()}')
+                                : null));
+                  }),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: FormField<DateTime>(
+                  validator: FormValidators.validateDate,
+                  builder: (FormFieldState<DateTime> field) {
+                    return InkWell(
+                        onTap: () async {
+                          final selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: _checkOutDate ?? _curr,
+                            firstDate: DateTime(_curr.year),
+                            lastDate: DateTime(_curr.year + 1),
+                          );
 
-                        if (selectedDate != null) {
-                          setState(() {
-                            _checkOutDate = selectedDate;
-                          });
-                          field.didChange(selectedDate);
-                        }
-                      },
-                      child: InputDecorator(
-                          decoration: InputDecoration(
-                            labelText:
-                                'Select the check-out date of your vehicle',
-                            errorText: field.errorText,
-                          ),
-                          child: (_checkOutDate != null)
-                              ? Text('${_checkOutDate!.toLocal()}')
-                              : null));
-                }),
-            ElevatedButton(onPressed: _addVehicle, child: const Text("Add"))
+                          if (selectedDate != null) {
+                            setState(() {
+                              _checkOutDate = selectedDate;
+                            });
+                            field.didChange(selectedDate);
+                          }
+                        },
+                        child: InputDecorator(
+                            decoration: InputDecoration(
+                              labelText:
+                                  'Select the check-out date of your vehicle',
+                              errorText: field.errorText,
+                            ),
+                            child: (_checkOutDate != null)
+                                ? Text('${_checkOutDate!.toLocal()}')
+                                : null));
+                  }),
+            ),
+            ElevatedButton(
+                onPressed: _addVehicle, child: const Text("Register Vehicle"))
           ],
         ),
       ),

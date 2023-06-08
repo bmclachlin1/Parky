@@ -18,8 +18,8 @@ class AddVehiclePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Register Vehicle",
-                      style: TextStyle(fontSize: 24)),
+                  Text("Register Vehicle",
+                      style: Theme.of(context).textTheme.headlineMedium),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.arrow_back),
                     label: const Text("Go back"),

@@ -28,14 +28,17 @@ class FormFieldBuilders {
     void Function(String?)? onSaved,
     String? Function(String?)? validator,
   }) {
-    return TextFormField(
-      initialValue: initialValue,
-      decoration: InputDecoration(
-        labelText: labelText,
-        hintText: hintText,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        initialValue: initialValue,
+        decoration: InputDecoration(
+          labelText: labelText,
+          hintText: hintText,
+        ),
+        onSaved: onSaved,
+        validator: validator,
       ),
-      onSaved: onSaved,
-      validator: validator,
     );
   }
 }
