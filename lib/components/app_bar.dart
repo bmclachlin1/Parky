@@ -6,7 +6,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text("Visitor Parking"),
+      title: const Text("Parky"),
       centerTitle: true,
       leading: IconButton(
         icon: const Icon(Icons.car_crash),

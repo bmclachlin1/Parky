@@ -1,6 +1,6 @@
-# Visitor parking app
+# Parky
 
-An application built in flutter meant to serve as an app where visitors can register for visitor parking at a colleagues/friends apartment.
+An application built in flutter meant to serve as an app where clients can register for visitor parking at someone's apartment.
 
 ## Getting Started
 
