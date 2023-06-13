@@ -42,16 +42,17 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
       _formKey.currentState!.save();
 
       final signatureAsBytes = await _signatureController.toPngBytes();
-      FirebaseFirestore.instance.collection("vehicles").add({
+      final jsonVehicle = {
         "make": _make,
         "model": _model,
         "year": _year,
         "checkInDate": _checkInDate,
-        "checkOutDate": _checkOutDate,
         "userId": FirebaseAuth.instance.currentUser?.uid,
         "userDisplayName": _userDisplayName,
         "signatureBytes": signatureAsBytes
-      });
+      };
+      if (_checkOutDate != null) jsonVehicle["checkOutDate"] = _checkOutDate;
+      FirebaseFirestore.instance.collection("vehicles").add(jsonVehicle);
 
       // see [https://stackoverflow.com/questions/68871880/do-not-use-buildcontexts-across-async-gaps]
       // for why we check if context is mounted
@@ -178,34 +179,33 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: FormField<DateTime>(
-                  validator: FormValidators.validateDate,
                   builder: (FormFieldState<DateTime> field) {
-                    return InkWell(
-                        onTap: () async {
-                          final selectedDate = await showDatePicker(
-                            context: context,
-                            initialDate: _checkOutDate ?? _curr,
-                            firstDate: DateTime(_curr.year),
-                            lastDate: DateTime(_curr.year + 1),
-                          );
+                return InkWell(
+                    onTap: () async {
+                      final selectedDate = await showDatePicker(
+                        context: context,
+                        initialDate: _checkOutDate ?? _curr,
+                        firstDate: DateTime(_curr.year),
+                        lastDate: DateTime(_curr.year + 1),
+                      );
 
-                          if (selectedDate != null) {
-                            setState(() {
-                              _checkOutDate = selectedDate;
-                            });
-                            field.didChange(selectedDate);
-                          }
-                        },
-                        child: InputDecorator(
-                            decoration: InputDecoration(
-                              labelText:
-                                  'Select the check-out date of your vehicle',
-                              errorText: field.errorText,
-                            ),
-                            child: (_checkOutDate != null)
-                                ? Text('${_checkOutDate!.toLocal()}')
-                                : null));
-                  }),
+                      if (selectedDate != null) {
+                        setState(() {
+                          _checkOutDate = selectedDate;
+                        });
+                        field.didChange(selectedDate);
+                      }
+                    },
+                    child: InputDecorator(
+                        decoration: InputDecoration(
+                          labelText:
+                              'Select the check-out date of your vehicle',
+                          errorText: field.errorText,
+                        ),
+                        child: (_checkOutDate != null)
+                            ? Text('${_checkOutDate!.toLocal()}')
+                            : null));
+              }),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
