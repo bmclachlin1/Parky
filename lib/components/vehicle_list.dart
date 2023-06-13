@@ -39,12 +39,6 @@ class _VehicleListState extends State<VehicleList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/add_vehicle');
-                      },
-                      icon: const Icon(Icons.add),
-                      label: const Text('Register Vehicle')),
                   Expanded(
                     child: ListView.builder(
                         itemCount: snapshot.data!.docs.length,
@@ -52,6 +46,10 @@ class _VehicleListState extends State<VehicleList> {
                           Map<String, dynamic> data = snapshot.data!.docs[index]
                               .data()! as Map<String, dynamic>;
                           Vehicle vehicle = Vehicle.fromJson(data);
+                          final String checkOutDate = vehicle.checkOutDate !=
+                                  null
+                              ? ", Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate!.toDate())}"
+                              : '';
 
                           return Container(
                               padding:
@@ -86,7 +84,7 @@ class _VehicleListState extends State<VehicleList> {
                                             "Registered by ${vehicle.userDisplayName}"),
                                         const SizedBox(height: 4.0),
                                         Text(
-                                            "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}, Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate.toDate())}"),
+                                            "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}$checkOutDate"),
                                       ])
                                 ],
                               ));

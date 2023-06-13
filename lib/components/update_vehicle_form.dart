@@ -22,7 +22,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
     _userDisplayName = widget.vehicle.userDisplayName;
     _year = widget.vehicle.year;
     _checkInDate = widget.vehicle.checkInDate.toDate();
-    _checkOutDate = widget.vehicle.checkOutDate.toDate();
+    _checkOutDate = widget.vehicle.checkOutDate?.toDate();
     super.initState();
   }
 
@@ -211,7 +211,6 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: FormField<DateTime>(
                   initialValue: _checkOutDate,
-                  validator: FormValidators.validateDate,
                   builder: (FormFieldState<DateTime> field) {
                     return InkWell(
                         onTap: () async {

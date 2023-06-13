@@ -16,6 +16,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.pushNamed(context, '/add_vehicle');
+            },
+            tooltip: 'Register Vehicle'),
+        IconButton(
           icon: const Icon(Icons.person),
           onPressed: () {
             Navigator.pushNamed(context, '/profile');

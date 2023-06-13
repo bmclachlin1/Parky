@@ -7,7 +7,7 @@ class Vehicle {
   final String userId;
   final String userDisplayName;
   final Timestamp checkInDate;
-  final Timestamp checkOutDate;
+  final Timestamp? checkOutDate;
 
   Vehicle(
       {required this.make,
@@ -16,7 +16,7 @@ class Vehicle {
       required this.userId,
       required this.userDisplayName,
       required this.checkInDate,
-      required this.checkOutDate});
+      this.checkOutDate});
 
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     return Vehicle(
