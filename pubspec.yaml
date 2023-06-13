@@ -43,6 +43,7 @@ dependencies:
   firebase_ui_auth: ^1.4.0
   firebase_ui_oauth_google: ^1.0.21
   signature: ^5.4.0
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:
