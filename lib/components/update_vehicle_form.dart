@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../helpers/form_helpers.dart';
 import '../models/vehicle.dart';
@@ -191,9 +192,20 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
                             lastDate: DateTime(_curr.year + 1),
                           );
 
+                          final selectedTime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.fromDateTime(
+                                  _checkInDate ?? _curr));
+
                           if (selectedDate != null) {
                             setState(() {
-                              _checkInDate = selectedDate;
+                              if (selectedTime != null) {
+                                _checkInDate = selectedDate.add(Duration(
+                                    hours: selectedTime.hour,
+                                    minutes: selectedTime.minute));
+                              } else {
+                                _checkInDate = selectedDate;
+                              }
                             });
                             field.didChange(selectedDate);
                           }
@@ -205,7 +217,8 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
                               errorText: field.errorText,
                             ),
                             child: (_checkInDate != null)
-                                ? Text('${_checkInDate!.toLocal()}')
+                                ? Text(DateFormat('MMM d, h:mma')
+                                    .format(_checkInDate!))
                                 : null));
                   }),
             ),
@@ -223,9 +236,20 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
                             lastDate: DateTime(_curr.year + 1),
                           );
 
+                          final selectedTime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.fromDateTime(
+                                  _checkOutDate ?? _curr));
+
                           if (selectedDate != null) {
                             setState(() {
-                              _checkOutDate = selectedDate;
+                              if (selectedTime != null) {
+                                _checkOutDate = selectedDate.add(Duration(
+                                    hours: selectedTime.hour,
+                                    minutes: selectedTime.minute));
+                              } else {
+                                _checkOutDate = selectedDate;
+                              }
                             });
                             field.didChange(selectedDate);
                           }
@@ -237,7 +261,8 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
                               errorText: field.errorText,
                             ),
                             child: (_checkOutDate != null)
-                                ? Text('${_checkOutDate!.toLocal()}')
+                                ? Text(DateFormat('MMM d, h:mma')
+                                    .format(_checkOutDate!))
                                 : null));
                   }),
             ),
@@ -245,12 +270,12 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () => _updateVehicle(),
+                  onPressed: _updateVehicle,
                   child: const Text('Update'),
                 ),
                 const SizedBox(width: 8.0),
                 ElevatedButton(
-                  onPressed: () => _deleteVehicle(),
+                  onPressed: _deleteVehicle,
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text('Delete'),
                 ),

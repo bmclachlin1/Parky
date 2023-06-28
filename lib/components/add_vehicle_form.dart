@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:signature/signature.dart';
 
 import '../helpers/form_helpers.dart';
@@ -156,9 +157,20 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                         lastDate: DateTime(_curr.year + 1),
                       );
 
+                      final selectedTime = await showTimePicker(
+                          context: context,
+                          initialTime:
+                              TimeOfDay.fromDateTime(_checkOutDate ?? _curr));
+
                       if (selectedDate != null) {
                         setState(() {
-                          _checkOutDate = selectedDate;
+                          if (selectedTime != null) {
+                            _checkOutDate = selectedDate.add(Duration(
+                                hours: selectedTime.hour,
+                                minutes: selectedTime.minute));
+                          } else {
+                            _checkOutDate = selectedDate;
+                          }
                         });
                         field.didChange(selectedDate);
                       }
@@ -170,7 +182,8 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                           errorText: field.errorText,
                         ),
                         child: (_checkOutDate != null)
-                            ? Text('${_checkOutDate!.toLocal()}')
+                            ? Text(DateFormat('MMM d, h:mma')
+                                .format(_checkOutDate!))
                             : null));
               }),
             ),
