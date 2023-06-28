@@ -7,7 +7,7 @@ void main() {
 
     setUp(() {
       // April 19, 2022 @ 8:32am
-      fakeNow = DateTime(2022, 4, 19, 8, 32);
+      fakeNow = DateTime(2023, 6, 28, 8, 32);
     });
     group('function formatForUser', () {
       group('function _formatForDateInPast', () {
@@ -37,7 +37,7 @@ void main() {
           expect(
               DateHelpers.formatForUser(
                   date: fakeNow.subtract(Duration(days: 6)), now: fakeNow),
-              'Wednesday, 8:32AM');
+              'Thursday, 8:32AM');
         });
 
         test(
@@ -46,11 +46,11 @@ void main() {
           expect(
               DateHelpers.formatForUser(
                   date: fakeNow.subtract(Duration(days: 7)), now: fakeNow),
-              'Apr 12, 8:32AM');
+              'Jun 21, 8:32AM');
           expect(
               DateHelpers.formatForUser(
                   date: fakeNow.subtract(Duration(days: 30)), now: fakeNow),
-              'Mar 20, 8:32AM');
+              'May 29, 8:32AM');
         });
       });
       group('function _formatForDateInFuture', () {
@@ -77,7 +77,7 @@ void main() {
           expect(
               DateHelpers.formatForUser(
                   date: fakeNow.add(Duration(days: 2)), now: fakeNow),
-              'Apr 21, 8:32AM');
+              'Jun 30, 8:32AM');
         });
       });
     });

@@ -28,7 +28,6 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
   String? _model;
   String? _userDisplayName;
   int? _year;
-  DateTime? _checkInDate;
   DateTime? _checkOutDate;
 
   void _addVehicle() async {
@@ -46,7 +45,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
         "make": _make,
         "model": _model,
         "year": _year,
-        "checkInDate": _checkInDate,
+        "checkInDate": _curr,
         "userId": FirebaseAuth.instance.currentUser?.uid,
         "userDisplayName": _userDisplayName,
         "signatureBytes": signatureAsBytes
@@ -143,38 +142,6 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 }
                 return null;
               },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: FormField<DateTime>(
-                  validator: FormValidators.validateDate,
-                  builder: (FormFieldState<DateTime> field) {
-                    return InkWell(
-                        onTap: () async {
-                          final selectedDate = await showDatePicker(
-                            context: context,
-                            initialDate: _checkInDate ?? _curr,
-                            firstDate: DateTime(_curr.year),
-                            lastDate: DateTime(_curr.year + 1),
-                          );
-
-                          if (selectedDate != null) {
-                            setState(() {
-                              _checkInDate = selectedDate;
-                            });
-                            field.didChange(selectedDate);
-                          }
-                        },
-                        child: InputDecorator(
-                            decoration: InputDecoration(
-                              labelText:
-                                  'Select the check-in date of your vehicle',
-                              errorText: field.errorText,
-                            ),
-                            child: (_checkInDate != null)
-                                ? Text('${_checkInDate!.toLocal()}')
-                                : null));
-                  }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
