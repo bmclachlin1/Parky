@@ -2,23 +2,49 @@ import 'package:intl/intl.dart';
 
 class DateHelpers {
   /// Friendly text for a [DateTime]
-  static String formatForUser({required DateTime startDate, DateTime? now}) {
+  static String formatForUser({required DateTime date, DateTime? now}) {
     final _now = now ?? DateTime.now();
-    final lastMidnight = DateTime(_now.year, _now.month, _now.day);
-    final yesterdayMidnight = DateTime(_now.year, _now.month, _now.day)
-        .subtract(const Duration(days: 1));
-    final sixDaysAgoMidnight = DateTime(_now.year, _now.month, _now.day)
-        .subtract(const Duration(days: 6));
 
-    if (startDate.isAfter(lastMidnight)) {
+    if (_now.isAfter(date)) {
+      return _formatForDateInPast(_now, date);
+    } else {
+      return _formatForDateInFuture(_now, date);
+    }
+  }
+
+  static String _formatForDateInFuture(DateTime now, DateTime date) {
+    final tomorrowMidnight =
+        DateTime(now.year, now.month, now.day).add(const Duration(days: 1));
+    final twoDaysFromNowMidnight =
+        DateTime(now.year, now.month, now.day).add(const Duration(days: 2));
+    final sevenDaysInFutureMidnight =
+        DateTime(now.year, now.month, now.day).add(const Duration(days: 7));
+
+    if (date.isBefore(tomorrowMidnight)) {
       return "Today";
     }
-    if (startDate.isAfter(yesterdayMidnight)) {
+    if (date.isBefore(twoDaysFromNowMidnight)) {
+      return "Tomorrow";
+    }
+    return DateFormat('MMM d, h:mma').format(date);
+  }
+
+  static String _formatForDateInPast(DateTime now, DateTime date) {
+    final lastMidnight = DateTime(now.year, now.month, now.day);
+    final yesterdayMidnight = DateTime(now.year, now.month, now.day)
+        .subtract(const Duration(days: 1));
+    final sixDaysAgoMidnight = DateTime(now.year, now.month, now.day)
+        .subtract(const Duration(days: 6));
+
+    if (date.isAfter(lastMidnight)) {
+      return "Today";
+    }
+    if (date.isAfter(yesterdayMidnight)) {
       return "Yesterday";
     }
-    if (startDate.isAfter(sixDaysAgoMidnight)) {
-      return DateFormat('EEEE, h:mma').format(startDate);
+    if (date.isAfter(sixDaysAgoMidnight)) {
+      return DateFormat('EEEE, h:mma').format(date);
     }
-    return DateFormat('MMM d, h:mma').format(startDate);
+    return DateFormat('MMM d, h:mma').format(date);
   }
 }
