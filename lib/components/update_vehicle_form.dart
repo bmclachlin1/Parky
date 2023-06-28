@@ -66,6 +66,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
         backgroundColor: Colors.green,
         content: Text('Successfully updated vehicle!'),
       );
+      if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(successMsg);
       Navigator.of(context).pop();
     } else {
@@ -93,6 +94,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
       backgroundColor: Colors.red,
       content: Text('Vehicle has been deleted'),
     );
+    if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(successMsg);
     Navigator.of(context).pop();
   }
@@ -148,7 +150,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
               },
             ),
             DropdownButtonFormField<int>(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               value: _year,
               items: FormValidators.generateYearsForDropdown()
                   .map(
