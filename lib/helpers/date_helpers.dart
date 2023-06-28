@@ -2,13 +2,13 @@ import 'package:intl/intl.dart';
 
 class DateHelpers {
   /// Friendly text for a [DateTime]
-  static String formatForUser({required DateTime date, DateTime? now}) {
-    final _now = now ?? DateTime.now();
+  static String formatForUser({required DateTime date, DateTime? injectedNow}) {
+    final now = injectedNow ?? DateTime.now();
 
-    if (_now.isAfter(date)) {
-      return _formatForDateInPast(_now, date);
+    if (now.isAfter(date)) {
+      return _formatForDateInPast(now, date);
     } else {
-      return _formatForDateInFuture(_now, date);
+      return _formatForDateInFuture(now, date);
     }
   }
 
@@ -17,8 +17,6 @@ class DateHelpers {
         DateTime(now.year, now.month, now.day).add(const Duration(days: 1));
     final twoDaysFromNowMidnight =
         DateTime(now.year, now.month, now.day).add(const Duration(days: 2));
-    final sevenDaysInFutureMidnight =
-        DateTime(now.year, now.month, now.day).add(const Duration(days: 7));
 
     if (date.isBefore(tomorrowMidnight)) {
       return "Today";

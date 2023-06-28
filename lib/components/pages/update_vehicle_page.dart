@@ -9,26 +9,19 @@ class UpdateVehiclePage extends StatelessWidget {
 
   const UpdateVehiclePage({super.key, required this.vehicle});
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(),
+      appBar: const ParkyAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Edit Vehicle",
                       style: Theme.of(context).textTheme.headlineMedium),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.arrow_back),
-                    label: const Text("Go back"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
                 ],
               ),
               UpdateVehicleForm(vehicle: vehicle),
