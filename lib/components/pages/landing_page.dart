@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_app/components/app_bar.dart';
 
+import '../app_bar.dart';
+import '../drawer.dart';
 import '../vehicle_list.dart';
 
 class LandingPage extends StatelessWidget {
@@ -10,7 +10,8 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: MyAppBar(),
+      appBar: ParkyAppBar(),
+      drawer: ParkyDrawer(),
       body: VehicleList(),
     );
   }
