@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-final drawerTextColor = TextStyle(
-  color: Colors.grey[600],
-);
-const tilePadding = EdgeInsets.only(left: 8.0, right: 8, top: 8);
-
 class ParkyDrawer extends StatelessWidget {
   const ParkyDrawer({super.key});
 
@@ -13,6 +8,7 @@ class ParkyDrawer extends StatelessWidget {
     final theme = Theme.of(context);
     final iconColorTheme = theme.iconTheme.color;
     final textTheme = theme.textTheme.labelLarge;
+    const tilePadding = EdgeInsets.only(left: 8.0, right: 8, top: 8);
 
     return Drawer(
       backgroundColor: theme.drawerTheme.backgroundColor,
