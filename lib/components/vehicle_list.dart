@@ -48,7 +48,7 @@ class _VehicleListState extends State<VehicleList> {
                           Vehicle vehicle = Vehicle.fromJson(data);
                           final String checkOutDate = vehicle.checkOutDate !=
                                   null
-                              ? ", Check out: ${DateHelpers.formatForUser(startDate: vehicle.checkOutDate!.toDate())}"
+                              ? ", Check out: ${DateHelpers.formatForUser(date: vehicle.checkOutDate!.toDate())}"
                               : '';
 
                           return Container(
@@ -84,7 +84,7 @@ class _VehicleListState extends State<VehicleList> {
                                             "Registered by ${vehicle.userDisplayName}"),
                                         const SizedBox(height: 4.0),
                                         Text(
-                                            "Check in: ${DateHelpers.formatForUser(startDate: vehicle.checkInDate.toDate())}$checkOutDate"),
+                                            "Check in: ${DateHelpers.formatForUser(date: vehicle.checkInDate.toDate())}$checkOutDate"),
                                       ])
                                 ],
                               ));
