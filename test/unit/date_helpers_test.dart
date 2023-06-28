@@ -14,8 +14,8 @@ void main() {
         test('should return "Today" if date occured since midnight today', () {
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.subtract(Duration(hours: 8, minutes: 31)),
-                  now: fakeNow),
+                  date: fakeNow.subtract(const Duration(hours: 8, minutes: 31)),
+                  injectedNow: fakeNow),
               'Today');
         });
         test(
@@ -23,12 +23,13 @@ void main() {
             () {
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.subtract(Duration(hours: 9)), now: fakeNow),
+                  date: fakeNow.subtract(const Duration(hours: 9)),
+                  injectedNow: fakeNow),
               'Yesterday');
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.subtract(Duration(hours: 8, minutes: 32)),
-                  now: fakeNow),
+                  date: fakeNow.subtract(const Duration(hours: 8, minutes: 32)),
+                  injectedNow: fakeNow),
               'Yesterday');
         });
         test(
@@ -36,7 +37,8 @@ void main() {
             () {
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.subtract(Duration(days: 6)), now: fakeNow),
+                  date: fakeNow.subtract(const Duration(days: 6)),
+                  injectedNow: fakeNow),
               'Thursday, 8:32AM');
         });
 
@@ -45,11 +47,13 @@ void main() {
             () {
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.subtract(Duration(days: 7)), now: fakeNow),
+                  date: fakeNow.subtract(const Duration(days: 7)),
+                  injectedNow: fakeNow),
               'Jun 21, 8:32AM');
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.subtract(Duration(days: 30)), now: fakeNow),
+                  date: fakeNow.subtract(const Duration(days: 30)),
+                  injectedNow: fakeNow),
               'May 29, 8:32AM');
         });
       });
@@ -58,7 +62,8 @@ void main() {
             () {
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.add(Duration(hours: 3)), now: fakeNow),
+                  date: fakeNow.add(const Duration(hours: 3)),
+                  injectedNow: fakeNow),
               'Today');
         });
 
@@ -67,7 +72,8 @@ void main() {
             () {
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.add(Duration(days: 1)), now: fakeNow),
+                  date: fakeNow.add(const Duration(days: 1)),
+                  injectedNow: fakeNow),
               'Tomorrow');
         });
 
@@ -76,7 +82,8 @@ void main() {
             () {
           expect(
               DateHelpers.formatForUser(
-                  date: fakeNow.add(Duration(days: 2)), now: fakeNow),
+                  date: fakeNow.add(const Duration(days: 2)),
+                  injectedNow: fakeNow),
               'Jun 30, 8:32AM');
         });
       });

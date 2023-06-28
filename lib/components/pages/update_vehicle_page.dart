@@ -9,6 +9,7 @@ class UpdateVehiclePage extends StatelessWidget {
 
   const UpdateVehiclePage({super.key, required this.vehicle});
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const ParkyAppBar(),
