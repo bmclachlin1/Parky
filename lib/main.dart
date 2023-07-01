@@ -11,11 +11,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const Parky());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Parky extends StatelessWidget {
+  const Parky({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

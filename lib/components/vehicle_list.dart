@@ -45,7 +45,10 @@ class _VehicleListState extends State<VehicleList> {
                         itemBuilder: (BuildContext context, int index) {
                           Map<String, dynamic> data = snapshot.data!.docs[index]
                               .data()! as Map<String, dynamic>;
-                          Vehicle vehicle = Vehicle.fromJson(data);
+                          final documentId = snapshot.data!.docs[index].id;
+                          data['id'] = documentId;
+                          final vehicle = Vehicle.fromJson(data);
+
                           final String checkOutDate = vehicle.checkOutDate !=
                                   null
                               ? ", Check out: ${DateHelpers.formatForUser(date: vehicle.checkOutDate!.toDate())}"

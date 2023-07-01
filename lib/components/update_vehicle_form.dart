@@ -17,6 +17,7 @@ class UpdateVehicleForm extends StatefulWidget {
 class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
   @override
   void initState() {
+    _documentId = widget.vehicle.documentId;
     _userId = widget.vehicle.userId;
     _make = widget.vehicle.make;
     _model = widget.vehicle.model;
@@ -30,6 +31,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
   final _formKey = GlobalKey<FormState>();
   final _curr = DateTime.now();
 
+  String? _documentId;
   String? _userId;
   String? _make;
   String? _model;
@@ -42,18 +44,10 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      final querySnapshot = await FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection('vehicles')
-          .where('userId', isEqualTo: widget.vehicle.userId)
-          .where('make', isEqualTo: widget.vehicle.make)
-          .where('model', isEqualTo: widget.vehicle.model)
-          .where('year', isEqualTo: widget.vehicle.year)
-          .where('userDisplayName', isEqualTo: widget.vehicle.userDisplayName)
-          .where('checkInDate', isEqualTo: widget.vehicle.checkInDate)
-          .where('checkOutDate', isEqualTo: widget.vehicle.checkOutDate)
-          .get();
-
-      querySnapshot.docs.first.reference.update({
+          .doc(_documentId)
+          .update({
         'make': _make,
         'model': _model,
         'year': _year,
@@ -80,17 +74,10 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
   }
 
   Future<void> _deleteVehicle() async {
-    final querySnapshot = await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('vehicles')
-        .where('userId', isEqualTo: widget.vehicle.userId)
-        .where('make', isEqualTo: widget.vehicle.make)
-        .where('model', isEqualTo: widget.vehicle.model)
-        .where('year', isEqualTo: widget.vehicle.year)
-        .where('userDisplayName', isEqualTo: widget.vehicle.userDisplayName)
-        .where('checkInDate', isEqualTo: widget.vehicle.checkInDate)
-        .where('checkOutDate', isEqualTo: widget.vehicle.checkOutDate)
-        .get();
-    querySnapshot.docs.first.reference.delete();
+        .doc(_documentId)
+        .delete();
     const successMsg = SnackBar(
       backgroundColor: Colors.red,
       content: Text('Vehicle has been deleted'),
