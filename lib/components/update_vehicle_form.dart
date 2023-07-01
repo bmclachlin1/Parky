@@ -74,17 +74,38 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
   }
 
   Future<void> _deleteVehicle() async {
-    await FirebaseFirestore.instance
-        .collection('vehicles')
-        .doc(_documentId)
-        .delete();
-    const successMsg = SnackBar(
-      backgroundColor: Colors.red,
-      content: Text('Vehicle has been deleted'),
-    );
-    if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(successMsg);
-    Navigator.of(context).pop();
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text(
+                "Are you sure you want to delete your vehicle registration?"),
+            content: const Text(
+                "Deleting your vehicle registration cannot be undone."),
+            actions: [
+              TextButton(
+                child: const Text("Cancel"),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              TextButton(
+                  child: const Text("Delete"),
+                  onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .collection('vehicles')
+                        .doc(_documentId)
+                        .delete();
+                    const successMsg = SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text('Vehicle has been deleted'),
+                    );
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(successMsg);
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  })
+            ],
+          );
+        });
   }
 
   @override
