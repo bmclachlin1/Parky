@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/date_helpers.dart';
 import '../models/vehicle.dart';
+import '../providers/selected_location_provider.dart';
 
 class VehicleList extends StatefulWidget {
   const VehicleList({super.key});
@@ -13,24 +15,26 @@ class VehicleList extends StatefulWidget {
 }
 
 class _VehicleListState extends State<VehicleList> {
-  final Stream<QuerySnapshot> _vehiclesStream = FirebaseFirestore.instance
-      .collection('vehicles')
-      .orderBy('checkInDate', descending: true)
-      .snapshots();
-
   @override
   Widget build(BuildContext context) {
+    final locationProvider = context.watch<SelectedLocationProvider>();
+    final Stream<QuerySnapshot> vehiclesStream = FirebaseFirestore.instance
+        .collection('vehicles')
+        .where('locationId', isEqualTo: locationProvider.selectedLocation)
+        .orderBy('checkInDate', descending: true)
+        .snapshots();
+
     return SafeArea(
       child: Center(
           child: StreamBuilder<QuerySnapshot>(
-        stream: _vehiclesStream,
+        stream: vehiclesStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Text("Something went wrong");
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const CircularProgressIndicator();
           }
 
           if (snapshot.hasData) {
@@ -39,6 +43,8 @@ class _VehicleListState extends State<VehicleList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  Text(
+                      'Welcome to ${locationProvider.selectedLocation?.name}.'),
                   Expanded(
                     child: ListView.builder(
                         itemCount: snapshot.data!.docs.length,

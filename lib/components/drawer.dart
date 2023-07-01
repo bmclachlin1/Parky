@@ -36,6 +36,16 @@ class ParkyDrawer extends StatelessWidget {
             padding: tilePadding,
             child: ListTile(
               onTap: () {
+                Navigator.pushNamed(context, '/vehicles');
+              },
+              leading: Icon(Icons.car_rental, color: iconColorTheme),
+              title: Text('V E H I C L E S', style: textTheme),
+            ),
+          ),
+          Padding(
+            padding: tilePadding,
+            child: ListTile(
+              onTap: () {
                 Navigator.pushNamed(context, '/add_vehicle');
               },
               leading: Icon(Icons.add, color: iconColorTheme),

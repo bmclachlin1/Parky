@@ -4,8 +4,8 @@ import 'package:flutter_firebase_app/components/pages/responsive/tablet_scaffold
 
 import 'responsive/responsive_layout.dart';
 
-class LandingPage extends StatelessWidget {
-  const LandingPage({super.key});
+class VehiclesPage extends StatelessWidget {
+  const VehiclesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

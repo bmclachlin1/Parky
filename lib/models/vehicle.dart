@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Vehicle {
   final String documentId;
+  final String locationId;
   final String make;
   final String model;
   final int year;
@@ -12,6 +13,7 @@ class Vehicle {
 
   Vehicle(
       {required this.documentId,
+      required this.locationId,
       required this.make,
       required this.model,
       required this.year,
@@ -23,6 +25,7 @@ class Vehicle {
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     return Vehicle(
         documentId: json['id'],
+        locationId: json['locationId'],
         make: json['make'],
         model: json['model'],
         year: json['year'],
@@ -34,6 +37,7 @@ class Vehicle {
 
   Map<String, dynamic> toJson() => {
         'id': documentId,
+        'locationId': locationId,
         'make': make,
         'model': model,
         'year': year,
