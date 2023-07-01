@@ -2,9 +2,11 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_app/components/pages/add_vehicle_page.dart';
 import 'package:flutter_firebase_app/components/pages/auth_gate_page.dart';
-import 'package:flutter_firebase_app/components/pages/landing_page.dart';
+import 'package:flutter_firebase_app/components/pages/locations_page.dart';
 import 'package:flutter_firebase_app/components/pages/update_vehicle_page.dart';
 
+import '../components/pages/vehicles_page.dart';
+import '../components/vehicle_list.dart';
 import '../models/vehicle.dart';
 
 class RouteGenerator {
@@ -14,8 +16,6 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (context) => const AuthGate());
-      case '/landing':
-        return MaterialPageRoute(builder: (context) => const LandingPage());
       case '/profile':
         return MaterialPageRoute(
             builder: (context) => ProfileScreen(
@@ -26,6 +26,8 @@ class RouteGenerator {
                     })
                   ],
                 ));
+      case '/vehicles':
+        return MaterialPageRoute(builder: (context) => const VehiclesPage());
       case '/add_vehicle':
         return MaterialPageRoute(builder: (context) => const AddVehiclePage());
       case '/update_vehicle':
