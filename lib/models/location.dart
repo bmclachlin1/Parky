@@ -1,21 +1,26 @@
-class Location {
+import 'package:equatable/equatable.dart';
+
+class Location extends Equatable {
   final String documentId;
   final String name;
-  final List<double> latLong;
+  final List<dynamic> latlong;
 
   Location({
     required this.documentId,
     required this.name,
-    required this.latLong,
-  }) : assert(latLong.length == 2);
+    required this.latlong,
+  });
 
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
-        documentId: json['id'], name: json['name'], latLong: json['latLong']);
+        documentId: json['id'], name: json['name'], latlong: json['latlong']);
   }
 
   Map<String, dynamic> toJson() =>
-      {'id': documentId, 'name': name, 'latLong': latLong};
+      {'id': documentId, 'name': name, 'latlong': latlong};
+
+  @override
+  List<Object> get props => [documentId, name, latlong];
 
   @override
   String toString() {

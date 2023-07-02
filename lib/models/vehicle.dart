@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class Vehicle {
+class Vehicle extends Equatable {
   final String documentId;
   final String locationId;
   final String make;
@@ -46,6 +47,19 @@ class Vehicle {
         'checkInDate': checkInDate,
         'checkOutDate': checkOutDate
       };
+
+  @override
+  List<Object?> get props => [
+        documentId,
+        locationId,
+        make,
+        model,
+        year,
+        userId,
+        userDisplayName,
+        checkInDate,
+        checkOutDate
+      ];
 
   @override
   String toString() {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_app/components/app_bar.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/location.dart';
 import '../../providers/selected_location_provider.dart';
 
 class LocationsPage extends StatefulWidget {
@@ -50,13 +51,15 @@ class _LocationsPageState extends State<LocationsPage> {
                       child: Text("Please select where you're staying.",
                           style: theme.textTheme.headlineSmall),
                     ),
-                    DropdownButton<String>(
+                    DropdownButton<Location>(
                         items: snapshot.data!.docs.map((doc) {
                           final Map<String, dynamic> data =
                               doc.data()! as Map<String, dynamic>;
+                          data['id'] = doc.id;
+                          print(data);
 
-                          return DropdownMenuItem<String>(
-                            value: doc.id,
+                          return DropdownMenuItem<Location>(
+                            value: Location.fromJson(data),
                             child: Text(data['name']),
                           );
                         }).toList(),

@@ -20,9 +20,11 @@ class _VehicleListState extends State<VehicleList> {
     final locationProvider = context.watch<SelectedLocationProvider>();
     final Stream<QuerySnapshot> vehiclesStream = FirebaseFirestore.instance
         .collection('vehicles')
-        .where('locationId', isEqualTo: locationProvider.selectedLocation)
+        .where('locationId',
+            isEqualTo: locationProvider.selectedLocation?.documentId)
         .orderBy('checkInDate', descending: true)
         .snapshots();
+    final theme = Theme.of(context);
 
     return SafeArea(
       child: Center(
@@ -43,8 +45,12 @@ class _VehicleListState extends State<VehicleList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                      'Welcome to ${locationProvider.selectedLocation?.name}.'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                        'Welcome to ${locationProvider.selectedLocation?.name}.',
+                        style: theme.textTheme.headlineMedium),
+                  ),
                   Expanded(
                     child: ListView.builder(
                         itemCount: snapshot.data!.docs.length,
