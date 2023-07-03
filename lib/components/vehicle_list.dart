@@ -45,12 +45,6 @@ class _VehicleListState extends State<VehicleList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                        'Welcome to ${locationProvider.selectedLocation?.name}.',
-                        style: theme.textTheme.headlineMedium),
-                  ),
                   Expanded(
                     child: ListView.builder(
                         itemCount: snapshot.data!.docs.length,

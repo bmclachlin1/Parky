@@ -12,7 +12,7 @@ class Vehicle extends Equatable {
   final Timestamp checkInDate;
   final Timestamp? checkOutDate;
 
-  Vehicle(
+  const Vehicle(
       {required this.documentId,
       required this.locationId,
       required this.make,

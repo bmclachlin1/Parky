@@ -2,11 +2,9 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_app/components/pages/add_vehicle_page.dart';
 import 'package:flutter_firebase_app/components/pages/auth_gate_page.dart';
-import 'package:flutter_firebase_app/components/pages/locations_page.dart';
 import 'package:flutter_firebase_app/components/pages/update_vehicle_page.dart';
 
 import '../components/pages/vehicles_page.dart';
-import '../components/vehicle_list.dart';
 import '../models/vehicle.dart';
 
 class RouteGenerator {

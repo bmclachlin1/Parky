@@ -7,7 +7,8 @@ import 'package:signature/signature.dart';
 import '../helpers/form_helpers.dart';
 
 class AddVehicleForm extends StatefulWidget {
-  const AddVehicleForm({super.key});
+  final String selectedLocation;
+  const AddVehicleForm({super.key, required this.selectedLocation});
 
   @override
   State<AddVehicleForm> createState() => _AddVehicleFormState();
@@ -49,7 +50,8 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
         "checkInDate": _curr,
         "userId": FirebaseAuth.instance.currentUser?.uid,
         "userDisplayName": _userDisplayName,
-        "signatureBytes": signatureAsBytes
+        "signatureBytes": signatureAsBytes,
+        "locationId": widget.selectedLocation
       };
       if (_checkOutDate != null) jsonVehicle["checkOutDate"] = _checkOutDate;
       FirebaseFirestore.instance.collection("vehicles").add(jsonVehicle);

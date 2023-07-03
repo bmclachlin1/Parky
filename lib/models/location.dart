@@ -5,7 +5,7 @@ class Location extends Equatable {
   final String name;
   final List<dynamic> latlong;
 
-  Location({
+  const Location({
     required this.documentId,
     required this.name,
     required this.latlong,

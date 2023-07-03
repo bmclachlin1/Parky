@@ -28,8 +28,8 @@ class ParkyDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, '/');
               },
-              leading: Icon(Icons.home, color: iconColorTheme),
-              title: Text('H O M E', style: textTheme),
+              leading: Icon(Icons.apartment, color: iconColorTheme),
+              title: Text('L O C A T I O N S', style: textTheme),
             ),
           ),
           Padding(
