@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ParkyDrawer extends StatelessWidget {
@@ -64,6 +65,20 @@ class ParkyDrawer extends StatelessWidget {
               leading: Icon(Icons.person, color: iconColorTheme),
               title: Text(
                 'P R O F I L E',
+                style: textTheme,
+              ),
+            ),
+          ),
+          Padding(
+            padding: tilePadding,
+            child: ListTile(
+              onTap: () async {
+                Navigator.of(context).pushNamed('/');
+                await FirebaseAuth.instance.signOut();
+              },
+              leading: Icon(Icons.arrow_back, color: iconColorTheme),
+              title: Text(
+                'L O G O U T',
                 style: textTheme,
               ),
             ),
