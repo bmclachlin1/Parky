@@ -55,28 +55,31 @@ class _LocationsPageState extends State<LocationsPage> {
                               style: theme.textTheme.headlineSmall,
                               textAlign: TextAlign.center),
                         ),
-                        InputDecorator(
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 12.0, vertical: 4.0),
-                              border: OutlineInputBorder()),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<Location>(
-                                items: snapshot.data!.docs.map((doc) {
-                                  final Map<String, dynamic> data =
-                                      doc.data()! as Map<String, dynamic>;
-                                  data['id'] = doc.id;
+                        SizedBox(
+                          width: 375,
+                          child: InputDecorator(
+                            decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 4.0),
+                                border: OutlineInputBorder()),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<Location>(
+                                  items: snapshot.data!.docs.map((doc) {
+                                    final Map<String, dynamic> data =
+                                        doc.data()! as Map<String, dynamic>;
+                                    data['id'] = doc.id;
 
-                                  return DropdownMenuItem<Location>(
-                                    value: Location.fromJson(data),
-                                    child: Text(data['name']),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  locationProvider
-                                      .updateSelectedLocation(value);
-                                },
-                                value: locationProvider.selectedLocation),
+                                    return DropdownMenuItem<Location>(
+                                      value: Location.fromJson(data),
+                                      child: Text(data['name']),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    locationProvider
+                                        .updateSelectedLocation(value);
+                                  },
+                                  value: locationProvider.selectedLocation),
+                            ),
                           ),
                         ),
                         Padding(
