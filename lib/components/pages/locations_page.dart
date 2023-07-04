@@ -85,13 +85,15 @@ class _LocationsPageState extends State<LocationsPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(elevation: 8),
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 8, fixedSize: Size(100, 50)),
                               onPressed:
                                   locationProvider.selectedLocation == null
                                       ? null
                                       : () => Navigator.of(context)
                                           .pushNamed('/vehicles'),
-                              child: const Text('Park')),
+                              child: const Text('Park',
+                                  style: TextStyle(fontSize: 20))),
                         )
                       ],
                     ),

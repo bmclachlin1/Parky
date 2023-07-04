@@ -13,8 +13,6 @@ import 'shared/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(fileName: ".env");
-
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: FirebaseOptions(

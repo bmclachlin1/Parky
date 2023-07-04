@@ -9,9 +9,9 @@ class DesktopScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         appBar: ParkyAppBar(),
-        body: const Row(
+        body: Row(
           children: [
             Expanded(flex: 1, child: ParkyDrawer()),
             Expanded(flex: 3, child: VehicleList()),
