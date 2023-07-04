@@ -57,6 +57,8 @@ class _LocationsPageState extends State<LocationsPage> {
                         ),
                         InputDecorator(
                           decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12.0, vertical: 4.0),
                               border: OutlineInputBorder()),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<Location>(
