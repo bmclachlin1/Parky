@@ -10,7 +10,7 @@
 .history
 .svn/
 migrate_working_dir/
-/shared/constants
+lib/shared/constants
 
 # IntelliJ related
 *.iml
