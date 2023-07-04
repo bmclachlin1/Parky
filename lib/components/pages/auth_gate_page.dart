@@ -4,6 +4,7 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 
+import '../../shared/constants.dart';
 import 'locations_page.dart';
 
 class AuthGate extends StatelessWidget {
@@ -18,7 +19,7 @@ class AuthGate extends StatelessWidget {
           return SignInScreen(
             providers: [
               EmailAuthProvider(),
-              GoogleProvider(clientId: dotenv.env["googleProviderClientId"]!)
+              GoogleProvider(clientId: Constants.googleProviderClientId)
             ],
             subtitleBuilder: (context, action) {
               return Padding(
