@@ -43,6 +43,7 @@ class _LocationsPageState extends State<LocationsPage> {
                   return Padding(
                     padding: const EdgeInsets.all(32.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Welcome to Parky!",
                             style: theme.textTheme.headlineMedium!.copyWith(

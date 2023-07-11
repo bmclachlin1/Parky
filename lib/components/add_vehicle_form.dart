@@ -29,6 +29,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
   String? _make;
   String? _model;
   String? _userDisplayName;
+  String? _licensePlate;
   int? _year;
   DateTime? _checkOutDate;
 
@@ -46,6 +47,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
       final jsonVehicle = {
         "make": _make,
         "model": _model,
+        "licensePlate": _licensePlate,
         "year": _year,
         "checkInDate": _curr,
         "userId": FirebaseAuth.instance.currentUser?.uid,
@@ -120,6 +122,19 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
               validator: (value) {
                 if (FormValidators.stringFieldValidatorCondition(value)) {
                   return 'Please enter the model of your vehicle';
+                }
+                return null;
+              },
+            ),
+            FormFieldBuilders.buildTextFormField(
+              labelText: 'License Plate',
+              hintText: 'Enter the license plate of your vehicle',
+              onSaved: (value) {
+                setState(() => _licensePlate = value);
+              },
+              validator: (value) {
+                if (FormValidators.stringFieldValidatorCondition(value)) {
+                  return 'Please enter the license plate of your vehicle';
                 }
                 return null;
               },

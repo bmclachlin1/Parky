@@ -21,6 +21,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
     _userId = widget.vehicle.userId;
     _make = widget.vehicle.make;
     _model = widget.vehicle.model;
+    _licensePlate = widget.vehicle.licensePlate;
     _userDisplayName = widget.vehicle.userDisplayName;
     _year = widget.vehicle.year;
     _checkInDate = widget.vehicle.checkInDate.toDate();
@@ -35,6 +36,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
   String? _userId;
   String? _make;
   String? _model;
+  String? _licensePlate;
   String? _userDisplayName;
   int? _year;
   DateTime? _checkInDate;
@@ -51,6 +53,7 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
         'make': _make,
         'model': _model,
         'year': _year,
+        'licensePlate': _licensePlate,
         'userDisplayName': _userDisplayName,
         'userId': _userId,
         'checkInDate': _checkInDate,
@@ -154,6 +157,20 @@ class _UpdateVehicleFormState extends State<UpdateVehicleForm> {
               validator: (value) {
                 if (FormValidators.stringFieldValidatorCondition(value)) {
                   return 'Please enter the model of your vehicle';
+                }
+                return null;
+              },
+            ),
+            FormFieldBuilders.buildTextFormField(
+              initialValue: _licensePlate,
+              labelText: 'License Plate',
+              hintText: 'Enter the license plate of your vehicle',
+              onSaved: (value) {
+                setState(() => _licensePlate = value);
+              },
+              validator: (value) {
+                if (FormValidators.stringFieldValidatorCondition(value)) {
+                  return 'Please enter the license plate of your vehicle';
                 }
                 return null;
               },

@@ -39,7 +39,10 @@ class Parky extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.indigo,
+          appBarTheme: const AppBarTheme(
+              foregroundColor: Colors.white, backgroundColor: Colors.indigo),
+          useMaterial3: true,
+          dividerColor: Colors.transparent,
           textTheme:
               GoogleFonts.ibmPlexSansTextTheme(Theme.of(context).textTheme)),
       initialRoute: '/',

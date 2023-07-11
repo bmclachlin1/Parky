@@ -6,6 +6,7 @@ class Vehicle extends Equatable {
   final String locationId;
   final String make;
   final String model;
+  final String licensePlate;
   final int year;
   final String userId;
   final String userDisplayName;
@@ -17,6 +18,7 @@ class Vehicle extends Equatable {
       required this.locationId,
       required this.make,
       required this.model,
+      required this.licensePlate,
       required this.year,
       required this.userId,
       required this.userDisplayName,
@@ -25,6 +27,7 @@ class Vehicle extends Equatable {
 
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     return Vehicle(
+        licensePlate: json['licensePlate'],
         documentId: json['id'],
         locationId: json['locationId'],
         make: json['make'],
@@ -37,6 +40,7 @@ class Vehicle extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
+        'licensePlate': licensePlate,
         'id': documentId,
         'locationId': locationId,
         'make': make,
@@ -54,11 +58,12 @@ class Vehicle extends Equatable {
         locationId,
         make,
         model,
+        licensePlate,
         year,
         userId,
         userDisplayName,
         checkInDate,
-        checkOutDate
+        checkOutDate,
       ];
 
   @override
