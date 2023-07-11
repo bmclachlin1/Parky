@@ -20,6 +20,16 @@ class AuthGate extends StatelessWidget {
               EmailAuthProvider(),
               GoogleProvider(clientId: Constants.googleProviderClientId)
             ],
+            sideBuilder: (context, constraints) {
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 40, horizontal: 10),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Image.asset('login_photo.jpg'),
+                ),
+              );
+            },
             subtitleBuilder: (context, action) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
