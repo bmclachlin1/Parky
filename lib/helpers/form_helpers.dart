@@ -21,7 +21,71 @@ class FormValidators {
 }
 
 class FormFieldBuilders {
-  static Widget buildTextFormField({
+  static Widget buildNameFormField(
+      {String? initialValue, void Function(String?)? onSaved}) {
+    return _buildTextFormField(
+      initialValue: initialValue,
+      labelText: 'Your full name',
+      hintText: 'Enter your first and last name',
+      onSaved: onSaved,
+      validator: (value) {
+        if (FormValidators.stringFieldValidatorCondition(value)) {
+          return 'Please enter your full name';
+        }
+        return null;
+      },
+    );
+  }
+
+  static Widget buildMakeFormField(
+      {String? initialValue, void Function(String?)? onSaved}) {
+    return _buildTextFormField(
+      initialValue: initialValue,
+      labelText: 'Make',
+      hintText: 'Enter the make of your vehicle',
+      onSaved: onSaved,
+      validator: (value) {
+        if (FormValidators.stringFieldValidatorCondition(value)) {
+          return 'Please enter the make of your vehicle';
+        }
+        return null;
+      },
+    );
+  }
+
+  static Widget buildModelFormField(
+      {String? initialValue, void Function(String?)? onSaved}) {
+    return _buildTextFormField(
+      initialValue: initialValue,
+      labelText: 'Model',
+      hintText: 'Enter the model of your vehicle',
+      onSaved: onSaved,
+      validator: (value) {
+        if (FormValidators.stringFieldValidatorCondition(value)) {
+          return 'Please enter the model of your vehicle';
+        }
+        return null;
+      },
+    );
+  }
+
+  static Widget buildLicensePlateFormField(
+      {String? initialValue, void Function(String?)? onSaved}) {
+    return _buildTextFormField(
+      initialValue: initialValue,
+      labelText: 'License Plate',
+      hintText: 'Enter the license plate of your vehicle',
+      onSaved: onSaved,
+      validator: (value) {
+        if (FormValidators.stringFieldValidatorCondition(value)) {
+          return 'Please enter the license plate of your vehicle';
+        }
+        return null;
+      },
+    );
+  }
+
+  static Widget _buildTextFormField({
     String? initialValue,
     String? labelText,
     String? hintText,

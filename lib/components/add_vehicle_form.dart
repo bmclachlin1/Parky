@@ -87,56 +87,24 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            FormFieldBuilders.buildTextFormField(
-              labelText: 'Your full name',
-              hintText: 'Enter your first and last name',
+            FormFieldBuilders.buildNameFormField(
               onSaved: (value) {
                 setState(() => _userDisplayName = value);
               },
-              validator: (value) {
-                if (FormValidators.stringFieldValidatorCondition(value)) {
-                  return 'Please enter your full name';
-                }
-                return null;
-              },
             ),
-            FormFieldBuilders.buildTextFormField(
-              labelText: 'Make',
-              hintText: 'Enter the make of your vehicle',
+            FormFieldBuilders.buildMakeFormField(
               onSaved: (value) {
                 setState(() => _make = value);
               },
-              validator: (value) {
-                if (FormValidators.stringFieldValidatorCondition(value)) {
-                  return 'Please enter the make of your vehicle';
-                }
-                return null;
-              },
             ),
-            FormFieldBuilders.buildTextFormField(
-              labelText: 'Model',
-              hintText: 'Enter the model of your vehicle',
+            FormFieldBuilders.buildModelFormField(
               onSaved: (value) {
                 setState(() => _model = value);
               },
-              validator: (value) {
-                if (FormValidators.stringFieldValidatorCondition(value)) {
-                  return 'Please enter the model of your vehicle';
-                }
-                return null;
-              },
             ),
-            FormFieldBuilders.buildTextFormField(
-              labelText: 'License Plate',
-              hintText: 'Enter the license plate of your vehicle',
+            FormFieldBuilders.buildLicensePlateFormField(
               onSaved: (value) {
                 setState(() => _licensePlate = value);
-              },
-              validator: (value) {
-                if (FormValidators.stringFieldValidatorCondition(value)) {
-                  return 'Please enter the license plate of your vehicle';
-                }
-                return null;
               },
             ),
             DropdownButtonFormField<int>(
@@ -215,6 +183,7 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                           style: Theme.of(context).textTheme.titleMedium),
                       ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
                               backgroundColor: Colors.red),
                           onPressed: () {
                             _signatureController.clear();
