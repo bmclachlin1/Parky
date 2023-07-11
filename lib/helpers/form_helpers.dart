@@ -108,11 +108,6 @@ class FormFieldBuilders {
 
   static Widget buildYearFormField(
       {int? value, void Function(int?)? onChanged}) {
-    return _buildDropdownFormField(value: value, onChanged: onChanged);
-  }
-
-  static Widget _buildDropdownFormField(
-      {int? value, void Function(int?)? onChanged}) {
     return DropdownButtonFormField<int>(
       value: value,
       padding: const EdgeInsets.symmetric(vertical: 8.0),
