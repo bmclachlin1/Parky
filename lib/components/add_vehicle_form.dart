@@ -107,26 +107,11 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                 setState(() => _licensePlate = value);
               },
             ),
-            DropdownButtonFormField<int>(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              items: FormValidators.generateYearsForDropdown()
-                  .map((int year) => DropdownMenuItem(
-                      value: year, child: Text(year.toString())))
-                  .toList(),
+            FormFieldBuilders.buildYearFormField(
               onChanged: (selectedYear) {
                 setState(() {
                   _year = selectedYear;
                 });
-              },
-              decoration: const InputDecoration(
-                labelText: 'Select a year',
-                border: OutlineInputBorder(),
-              ),
-              validator: (value) {
-                if (value == null) {
-                  return "Please select the year of your vehicle";
-                }
-                return null;
               },
             ),
             Padding(

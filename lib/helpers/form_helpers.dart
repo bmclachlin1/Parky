@@ -105,4 +105,32 @@ class FormFieldBuilders {
       ),
     );
   }
+
+  static Widget buildYearFormField(
+      {int? value, void Function(int?)? onChanged}) {
+    return _buildDropdownFormField(value: value, onChanged: onChanged);
+  }
+
+  static Widget _buildDropdownFormField(
+      {int? value, void Function(int?)? onChanged}) {
+    return DropdownButtonFormField<int>(
+      value: value,
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      items: FormValidators.generateYearsForDropdown()
+          .map((int year) =>
+              DropdownMenuItem(value: year, child: Text(year.toString())))
+          .toList(),
+      onChanged: onChanged,
+      decoration: const InputDecoration(
+        labelText: 'Select a year',
+        border: OutlineInputBorder(),
+      ),
+      validator: (value) {
+        if (value == null) {
+          return "Please select the year of your vehicle";
+        }
+        return null;
+      },
+    );
+  }
 }
