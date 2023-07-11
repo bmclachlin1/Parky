@@ -18,7 +18,7 @@ class AuthGate extends StatelessWidget {
           return SignInScreen(
             providers: [
               EmailAuthProvider(),
-              GoogleProvider(clientId: Constants.googleProviderClientId)
+              GoogleProvider(clientId: Constants.googleProviderClientId),
             ],
             sideBuilder: (context, constraints) {
               return Padding(
@@ -26,7 +26,7 @@ class AuthGate extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 40, horizontal: 10),
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: Image.asset('login_photo.jpg'),
+                  child: Image.asset('assets/login_photo.jpg'),
                 ),
               );
             },

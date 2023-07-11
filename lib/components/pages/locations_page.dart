@@ -86,7 +86,7 @@ class _LocationsPageState extends State<LocationsPage> {
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  elevation: 8, fixedSize: Size(100, 50)),
+                                  elevation: 8, fixedSize: const Size(100, 50)),
                               onPressed:
                                   locationProvider.selectedLocation == null
                                       ? null
