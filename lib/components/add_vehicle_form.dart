@@ -177,11 +177,18 @@ class _AddVehicleFormState extends State<AddVehicleForm> {
                           label: const Text("Clear"))
                     ],
                   ),
-                  Signature(
-                      key: const Key('signature'),
-                      controller: _signatureController,
-                      backgroundColor: Colors.grey,
-                      height: 100),
+                  SizedBox(height: 8.0),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        border: Border.all(width: 4),
+                        borderRadius: BorderRadius.circular(4)),
+                    child: Signature(
+                        key: const Key('signature'),
+                        controller: _signatureController,
+                        backgroundColor: Colors.white,
+                        height: 100),
+                  ),
                 ],
               ),
             ),
