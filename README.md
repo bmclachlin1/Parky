@@ -2,7 +2,7 @@
 
 An application built in flutter meant to serve as an app where clients can register for visitor parking at someone's apartment.
 
-See the web version at https://flutterfirebaseapp-45730.web.app/#/
+See the web version at https://bmclachlin1.github.io/Parky/
 ## Getting Started
 
 This project is a starting point for a Flutter application.
