@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_firebase_app/firebase_options.dart';
 import 'package:flutter_firebase_app/navigation/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';

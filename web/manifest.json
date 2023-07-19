@@ -1,6 +1,6 @@
 {
-    "name": "flutter_firebase_app",
-    "short_name": "flutter_firebase_app",
+    "name": "parky",
+    "short_name": "parky",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
