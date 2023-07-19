@@ -20,7 +20,7 @@ class RouteGenerator {
                   appBar: AppBar(title: const Text("User Profile")),
                   actions: [
                     SignedOutAction((context) {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed('/');
                     })
                   ],
                 ));
