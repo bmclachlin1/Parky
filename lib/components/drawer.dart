@@ -51,7 +51,7 @@ class ParkyDrawer extends StatelessWidget {
               },
               leading: Icon(Icons.add, color: iconColorTheme),
               title: Text(
-                'R E G I S T E R   V E H I C L E',
+                'P A R K   V E H I C L E',
                 style: textTheme,
               ),
             ),
